@@ -2,12 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/bgContent"
     android:baselineAligned="false"
     android:orientation="horizontal">
 
     <!-- LEFT TITLE PART -->
     <RelativeLayout
+        android:id="@+id/arrived_relative_layout"
         android:layout_width="match_parent"
         android:layout_height="155dp"
         android:layout_weight="3"
@@ -63,6 +65,7 @@
         android:paddingTop="20dp">
 
         <ImageView
+            android:visibility="gone"
             android:id="@+id/title_from_to_dots"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -87,6 +90,34 @@
             android:textSize="16sp" />
 
         <ImageView
+            android:visibility="gone"
+            android:id="@+id/title_from_to"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@+id/title_from_to_dots"
+            android:layout_toRightOf="@id/title_from_address"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-80dp"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/dottdline"
+            android:layerType="software"
+            />
+
+        <TextView
+            android:id="@+id/title_to_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/title_from_to_dots"
+            android:layout_marginTop="-5dp"
+            android:layout_toLeftOf="@+id/title_from_to"
+            android:layout_alignParentRight="true"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <ImageView
             android:id="@+id/title_from_to_dots_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -97,18 +128,56 @@
             android:layout_toRightOf="@+id/title_from_to_dots"
             android:src="@color/contentDividerLine" />
 
-        <TextView
-            android:id="@+id/title_to_address"
-            android:layout_width="wrap_content"
+
+
+        <!--<com.kofigyan.stateprogressbar.StateProgressBar-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/your_state_progress_bar_id"-->
+            <!--android:layout_below="@id/title_from_to_dots_divider"-->
+
+            <!--app:spb_descriptionLinesSpacing="5.0dp"-->
+            <!--app:spb_maxStateNumber="two"-->
+            <!--app:spb_maxDescriptionLines="5"-->
+            <!--app:spb_stateBackgroundColor="#BDBDBD"-->
+            <!--app:spb_stateForegroundColor="#009688"-->
+            <!--app:spb_stateNumberBackgroundColor="#808080"-->
+            <!--app:spb_stateNumberForegroundColor="#eeeeee"-->
+            <!--app:spb_currentStateDescriptionColor="#009688"-->
+            <!--app:spb_stateDescriptionColor="#808080"-->
+            <!--app:spb_animateToCurrentProgressState="true"-->
+            <!--app:spb_checkStateCompleted="true"/>-->
+
+        <com.xw.repo.BubbleSeekBar
+            android:id="@+id/title_seekBar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/title_from_to_dots_divider"
             android:layout_toEndOf="@id/title_from_to_dots"
             android:layout_toRightOf="@id/title_from_to_dots"
-            android:ellipsize="marquee"
-            android:fadingEdge="horizontal"
-            android:singleLine="true"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:clickable="false"
+            android:enabled="false"
+
+            app:bsb_max="100"
+            app:bsb_min="0"
+            app:bsb_progress="33"
+            app:bsb_hide_bubble="true"
+            app:bsb_bubble_color="@color/bubbleColor"
+            app:bsb_second_track_color="@color/bgProgress"
+            app:bsb_track_color="@color/colorPrimaryLight"
+            app:bsb_always_show_bubble="true"
+            app:bsb_section_count="1"
+            app:bsb_show_progress_in_float="false"
+            app:bsb_show_section_mark="true"
+            app:bsb_auto_adjust_section_mark="true"
+            app:bsb_show_section_text="false"
+            app:bsb_bubble_text_size="1dp"
+            app:bsb_show_thumb_text="false"
+            app:bsb_thumb_text_size="0dp"
+            app:bsb_track_size="4dp"
+            app:bsb_thumb_color="@color/colorPrimaryDark"
+
+            />
 
 
         <TextView

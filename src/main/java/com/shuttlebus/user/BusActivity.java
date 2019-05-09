@@ -1,7 +1,11 @@
 package com.shuttlebus.user;
 
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,18 +31,25 @@ public class BusActivity extends AppCompatActivity {
 
     private ListView theListView;
     private FoldingCellListAdapter mAdapter;
+
+    private static Scheduler sd;
     private static BusStation[] busStations;
     private static double[] curDis;
     private static double[] maxDis;
     private static int[] progress;
     private static boolean[] isArrived;
-    private Context mContext = this;
-
-    private static Scheduler sd;
 
     private TextView busTimeTextView;
     private FloatingActionButton fab;
     private EditText tmpEdit;
+
+    private Context mContext = this;
+
+    private ProgressDialog progressDialog;
+    private static final int TIME_OUT = 1001;
+
+    @SuppressLint("HandlerLeak")
+    private  Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +76,33 @@ public class BusActivity extends AppCompatActivity {
         }
 
 
+
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                items.clear();
+                if (progressDialog != null && progressDialog.isShowing()) {
+                    return;
+                }
+
+                fab.setEnabled(false);
+                fab.setClickable(false);
+                progressDialog =  ProgressDialog.show(mContext, "Please Wait", "잠시만 기달려 주세요\n데이터를 불러오고 있습니다."
+                        , false, false);
+
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (progressDialog != null && progressDialog.isShowing()) {
+                            progressDialog.dismiss();
+                        }
+                    }
+                }, 1250);
+
+
                 try{
                     DB_GetData.getData(mContext);
-                    Log.e("[getData]-->" + mContext,"정상실행");
+                    Log.e("[getData]-->" + getApplicationContext(),"정상실행");
                 } catch (NullPointerException e){
                     Log.e("NullPoint-->" , e.getMessage());
                 } catch (Exception e){
@@ -79,6 +110,7 @@ public class BusActivity extends AppCompatActivity {
                 }
 
                 try {
+                    items.clear();
                     setAdapter();
                     Log.e("[setAdapter]-->","정상실행");
                 }catch (ArrayIndexOutOfBoundsException e){
@@ -88,8 +120,12 @@ public class BusActivity extends AppCompatActivity {
                 } catch (Exception e){
                     Log.e("Exc[setAdapter]-->",e.getMessage());
                 }
+
+                fab.setEnabled(true);
+                fab.setClickable(true);
             }
         });
+
 
     }
 
@@ -97,6 +133,8 @@ public class BusActivity extends AppCompatActivity {
         busTimeTextView = (TextView) findViewById(R.id.busTimeText);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         tmpEdit = (EditText) findViewById(R.id.tmpEdit);
+
+
     }
 
 //    @SuppressLint("RestrictedApi")
@@ -152,7 +190,7 @@ public class BusActivity extends AppCompatActivity {
 
 
         // 임시 테스트용도 if문
-        boolean tmp = true;
+        boolean tmp = false;
         if(tmp){
         // 공휴일 판단.
 //        if(Holiday.isHoliday(today)){
@@ -201,9 +239,9 @@ public class BusActivity extends AppCompatActivity {
                                         , maxDis[i]
                                         , cal.get(Calendar.YEAR) + "년 " + (cal.get(Calendar.MONTH) + 1) + "월 " + cal.get(Calendar.DATE) + "일"
                                         , BusStation.getHour() + "시 " + BusStation.getMinute() + "분"
-                                        , calLateTime(curDis[i], 10))
+                                        , calLateTime(curDis[i], 0.325))
                         );
-                        Log.e("[lateTime]-->" +calLateTime(curDis[i], 10)," 남음");
+                        Log.e("[lateTime]-->" +calLateTime(curDis[i], 0.325)," 남음");
                     }
                 }
             }
@@ -230,7 +268,7 @@ public class BusActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
                 // toggle clicked cell state
-                ((FoldingCell) view).toggle(true);
+                ((FoldingCell) view).toggle(false);
                 // register in adapter that state for selected cell is toggled
                 mAdapter.registerToggle(pos);
             }

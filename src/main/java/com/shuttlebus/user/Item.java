@@ -1,6 +1,9 @@
 package com.shuttlebus.user;
 
 import android.view.View;
+
+import com.xw.repo.BubbleSeekBar;
+
 import java.util.ArrayList;
 
 /**
@@ -8,6 +11,7 @@ import java.util.ArrayList;
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class Item {
+
     private String startStation;
     private String endStation;
     private String date;
@@ -16,6 +20,7 @@ public class Item {
     private boolean isArrived;
     private double distance;
     private double lateTime;
+    private BubbleSeekBar seekBar;
 
     private View.OnClickListener requestBtnClickListener;
 
@@ -100,6 +105,13 @@ public class Item {
 
     public double getDistance(){
         return distance;
+    }
+
+    public void setSeekBar(BubbleSeekBar seekBar){
+        this.seekBar = seekBar;
+    }
+    public BubbleSeekBar getSeekBar(){
+        return seekBar;
     }
 
     public View.OnClickListener getRequestBtnClickListener() {

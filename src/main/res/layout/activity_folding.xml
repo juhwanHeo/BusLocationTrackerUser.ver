@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".BusActivity">
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_height="match_parent"
             android:layout_width="match_parent">
@@ -28,10 +29,26 @@
                             android:id="@+id/tmpEdit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:maxLength="1"
                             android:hint="코스:"/>
 
+                        <!--<com.kofigyan.stateprogressbar.StateProgressBar-->
+                            <!--android:id="@+id/your_state_progress_bar_id"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--app:spb_currentStateNumber="three"-->
+                            <!--app:spb_maxStateNumber="four"-->
+                            <!--app:spb_stateBackgroundColor="#BDBDBD"-->
+                            <!--app:spb_stateForegroundColor="#009688"-->
+                            <!--app:spb_stateNumberBackgroundColor="#808080"-->
+                            <!--app:spb_stateNumberForegroundColor="#eeeeee"-->
+                            <!--app:spb_currentStateDescriptionColor="#009688"-->
+                            <!--app:spb_stateDescriptionColor="#808080"-->
+                            <!--app:spb_animateToCurrentProgressState="true"-->
+                            <!--app:spb_checkStateCompleted="true"/>-->
+
                         <ListView
-                            android:background="#D0C6BC"
+                            android:background="@color/colorPrimaryLight"
                             android:visibility="visible"
                             android:id="@+id/busListView"
                             android:layout_width="match_parent"
@@ -46,6 +63,7 @@
                             android:paddingTop="@dimen/activity_vertical_margin"
                             android:scrollbars="none"/>
                 </LinearLayout>
+
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/fab"

@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimaryLight">#5EAEEB</color>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorWhite">#ffffff</color>
     <color name="backGroundGreen">#9DC8C8</color>
+
+    <color name="notArrivedColor">#6C6C74</color>
+
+
+    <color name="bgProgress">#54AC90</color>
+
+    <color name="bubbleColor">#6B54AC90</color>
 
     <color name="bgBackSideColor">#f4f0ff</color>
     <color name="bgTitleLeft">#469179</color>

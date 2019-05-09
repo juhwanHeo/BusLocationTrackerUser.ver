@@ -1,38 +1,32 @@
 package com.shuttlebus.user;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.List;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DB_GetData {
 
     // DB Connection
-    private static final String busInfoAddress = "http://222.120.179.99/get/getBusInfo.php";
+    private static final String allAddress = "http://...address";
+    private static final String ADDRESS = "http://...address";
     private static final String TAG_ARRIVED = "arrived";
-    private static final String TAG_IS_ARRIVED = "isArrived";
     private static final String TAG_LATLON = "LatLon";
-    private static final String TAG_ID = "str_user_id";
-    private static final String TAG_TIME = "str_datetime";
-    private static final String TAG_LAT = "str_latitude";
-    private static final String TAG_LON = "str_longitude";
 
-    // json
-    private static String myJSON;
-    private static JSONArray locations = null;
-    private static JSONArray stationArrived = null;
-
+    //
+    private static List<BusInfo> busInfo;
+    private static List<Arrived> arrivedList;
 
     // value getting at DB
     private static String id;
@@ -42,110 +36,124 @@ public class DB_GetData {
     private static boolean[] isArrived;
 
 
-    private static void getLatLonData() {
-//        Log.e("myJson[getDBdata]: ", myJSON);
-        if(myJSON != null){
-            try {
-                JSONObject jsonObj = new JSONObject(myJSON);
-                locations = jsonObj.getJSONArray(TAG_LATLON);
-                JSONObject c = locations.getJSONObject(0);
-
-                id = c.getString(TAG_ID);
-                time = c.getString(TAG_TIME);
-                latitude = c.getString(TAG_LAT);
-                longitude = c.getString(TAG_LON);
-//                Log.e("lat: " + latitude + ", lon: " + longitude, jsonObj.toString());
-            } catch (JSONException e) {
-                Log.e("JSONException:" , e.getMessage());
-            }
-        }
-
-    }
-    private static void getArrivedData() {
-        if(myJSON != null){
-            try {
-                JSONObject jsonObj = new JSONObject(myJSON);
-                stationArrived = jsonObj.getJSONArray(TAG_ARRIVED);
-
-                isArrived = new boolean[stationArrived.length()];
-                for(int i = 0; i < stationArrived.length(); i++) {
-                    JSONObject c = stationArrived.getJSONObject(i);
-                    Log.e("isArrived["+i+"]:",c.getString(TAG_IS_ARRIVED));
-                    isArrived[i] = Boolean.parseBoolean(c.getString(TAG_IS_ARRIVED));
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+    private static void getLatLonData() throws NullPointerException {
+        id = busInfo.get(0).getID();
+        time = busInfo.get(0).getTime();
+        latitude = busInfo.get(0).getLatitude();
+        longitude = busInfo.get(0).getLongitude();
 
     }
 
+    private static void getArrivedData() throws NullPointerException {
+        isArrived = new boolean[arrivedList.size()];
+        for (int i = 0; i < isArrived.length; i++)
+            isArrived[i] = Boolean.parseBoolean(arrivedList.get(i).getIsArrived());
+    }
 
-    public static void getData(final Context mContext) throws NullPointerException{
-        class GetLocationData extends AsyncTask<String, Void, String> {
 
-            private ProgressDialog progressDialog;
+    public static void getData(final Context mContext) throws NullPointerException {
 
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(ADDRESS)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        BusLocationService busLocationService = retrofit.create(BusLocationService.class);
+        Call<RetrofitRepo> call = busLocationService.getPostLocationData(TAG_ARRIVED, TAG_LATLON);
+        call.enqueue(new Callback<RetrofitRepo>() {
             @Override
-            protected void onPreExecute() {
-                // UI 작업을 수행하는 부분
-                super.onPreExecute();
-                progressDialog = progressDialog.show(mContext,"Please Wait","잠시만 기달려 주세요\n데이터를 불러오고 있습니다.",true,true);
-//                Log.e("progressDialog:",progressDialog.toString());
-            }
-            @Override
-            protected String doInBackground(String... strings) {
-                String serverUrl = strings[0];
-                BufferedReader bufferedReader = null;
-
+            public void onResponse(Call<RetrofitRepo> call, Response<RetrofitRepo> response) {
+                // connection success!!!
                 try {
-                    URL url = new URL(serverUrl);
-                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                    con.setReadTimeout(1000);
-                    con.setConnectTimeout(1000);
-                    con.setDoInput(true);
-                    con.connect();
-
-                    StringBuilder sb = new StringBuilder();
-                    bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-
-                    String json;
-                    while ((json = bufferedReader.readLine()) != null) {
-                        sb.append(json + "\n");
+                    if (response.body() != null) {
+                        busInfo = response.body().getLatLon();
+                        arrivedList = response.body().getArrived();
+                    } else {
+                        throw new NullPointerException("JSON?�류");
                     }
-                    return sb.toString().trim();
 
+                    getArrivedData();
+                    getLatLonData();
+                } catch (NullPointerException e) {
+                    Log.e("[ERROR]", e.getMessage());
                 } catch (Exception e) {
-                    return null;
+                    Log.e("[ERROR]", "Error");
                 }
 
             }
 
-            // 모든 작업이 끝난 후 처리되는 메소드
             @Override
-            protected void onPostExecute(String result) throws NullPointerException{
-                super.onPostExecute(result);
-                myJSON = result;
-                getArrivedData();
-                getLatLonData();
-
-
-                progressDialog.dismiss();
-
-//                try {
-//                    Log.e("myJSON: ", myJSON);
-//                } catch (NullPointerException e){
-//                    e.printStackTrace();
-//                }
+            public void onFailure(Call<RetrofitRepo> call, Throwable t) {
+                // connection fail...
             }
-        }
-        GetLocationData g = new GetLocationData();
-//        g.execute(busInfoAddress);
-        g.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR ,busInfoAddress);
+        });
+
 
     }
-
+//        class DownloadTask extends AsyncTask {
+//
+//            private ProgressDialog progressDialog;
+//
+//            @Override
+//            protected void onPreExecute() {
+//                progressDialog = ProgressDialog.show(mContext, "Please Wait", "?�시�?기달??주세??n?�이?��? 불러?�고 ?�습?�다."
+//                        , false, false);
+//
+//                //?�업 준�?코드 ?�성
+//
+//                super.onPreExecute();
+//            }
+//
+//            @Override
+//            protected Object doInBackground(Object[] objects) {
+//                Retrofit retrofit = new Retrofit.Builder()
+//                        .baseUrl(ADDRESS)
+//                        .addConverterFactory(GsonConverterFactory.create())
+//                        .build();
+//                BusLocationService busLocationService = retrofit.create(BusLocationService.class);
+//                Call<RetrofitRepo> call = busLocationService.getPostLocationData(TAG_ARRIVED, TAG_LATLON);
+//                call.enqueue(new Callback<RetrofitRepo>() {
+//                    @Override
+//                    public void onResponse(Call<RetrofitRepo> call, Response<RetrofitRepo> response) {
+//                        // connection success!!!
+//                        try {
+//                            if (response.body() != null) {
+//                                busInfo = response.body().getLatLon();
+//                                arrivedList = response.body().getArrived();
+//                            } else {
+//                                throw new NullPointerException("JSON?�류");
+//                            }
+//
+//                            Thread.sleep(1000);
+//                            getArrivedData();
+//                            getLatLonData();
+//                        } catch (NullPointerException e) {
+//                            Log.e("[ERROR]", e.getMessage());
+//                        } catch (Exception e) {
+//                            Log.e("[ERROR]", "Error");
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<RetrofitRepo> call, Throwable t) {
+//                        // connection fail...
+//                    }
+//                });
+//
+//                return null;
+//            }
+//
+//            @Override
+//            protected void onPostExecute(Object o) {
+//                super.onPostExecute(o);
+//                if (progressDialog != null && progressDialog.isShowing()) {
+//                    progressDialog.dismiss();
+//                }
+//            }
+//        }
+//        new DownloadTask().execute();
+////        d.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//    }
 
 
     public static double getLatitude() {
@@ -157,23 +165,25 @@ public class DB_GetData {
     }
 
 
-    public String getDBId(){
-        return this.id;
+    public static String getDBId() {
+        return id;
     }
 
-    public String getDBTime(){
-        return this.time;
+    public static String getDBTime() {
+        return time;
     }
 
-    public static String getDBLatitude(){
+    public static String getDBLatitude() {
         return latitude;
     }
 
-    public static String getDBLongitude(){
+    public static String getDBLongitude() {
         return longitude;
     }
 
     public static boolean[] getIsArrived() {
         return isArrived;
     }
+
+
 }
