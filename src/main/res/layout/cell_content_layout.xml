@@ -57,7 +57,7 @@
             android:src="@drawable/head_image" />
         -->
         <TextView
-            android:id="@+id/head_image"
+            android:id="@+id/background_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
@@ -72,9 +72,9 @@
             style="@style/ContentImageBadgeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/head_image"
-            android:layout_alignLeft="@id/head_image"
-            android:layout_alignStart="@id/head_image"
+            android:layout_alignBottom="@id/background_tv"
+            android:layout_alignLeft="@id/background_tv"
+            android:layout_alignStart="@id/background_tv"
             android:paddingBottom="10dp"
             android:paddingLeft="20dp"
             android:paddingStart="20dp"
@@ -96,9 +96,9 @@
             style="@style/ContentImageBadgeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/head_image"
-            android:layout_alignEnd="@id/head_image"
-            android:layout_alignRight="@id/head_image"
+            android:layout_alignBottom="@id/background_tv"
+            android:layout_alignEnd="@id/background_tv"
+            android:layout_alignRight="@id/background_tv"
             android:paddingBottom="10dp"
             android:paddingEnd="20dp"
             android:paddingRight="20dp"
@@ -118,7 +118,7 @@
             style="@style/ContentImageBadgeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/head_image"
+            android:layout_alignBottom="@id/background_tv"
             android:layout_centerHorizontal="true"
             android:paddingBottom="10dp"
             android:text="0.0km" />
@@ -247,7 +247,7 @@
                     android:text="이전 정류장" />
 
                 <TextView
-                    android:id="@+id/content_startStation_text"
+                    android:id="@+id/content_previousStation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@id/content_from_badge"
@@ -257,19 +257,6 @@
                     android:textColor="@color/mainTextColor"
                     android:textSize="18sp"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/content_from_address_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/content_startStation_text"
-                    android:layout_alignStart="@id/content_startStation_text"
-                    android:layout_below="@id/content_startStation_text"
-                    android:text="강원도 춘천시 공지로 591"
-                    android:textColor="@color/mainTextColor"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:textSize="14sp" />
 
             </RelativeLayout>
 
@@ -288,7 +275,7 @@
                     android:text="다음 정류장" />
 
                 <TextView
-                    android:id="@+id/content_endStation_text"
+                    android:id="@+id/content_nextStation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@id/content_to_badge"
@@ -299,26 +286,14 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/content_to_address_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/content_endStation_text"
-                    android:layout_alignStart="@id/content_endStation_text"
-                    android:layout_below="@id/content_endStation_text"
-                    android:text="경기도 남양주시 화도읍 마석중앙로 107"
-                    android:textColor="@color/mainTextColor"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:textSize="14sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/arrow" />
+                    android:layout_centerVertical="true"/>
+                    <!--android:src="@drawable/arrow" />-->
 
             </RelativeLayout>
 
@@ -339,44 +314,44 @@
             android:baselineAligned="false"
             android:orientation="horizontal">
 
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+            <!--<RelativeLayout-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1">-->
 
-                <TextView
-                    android:id="@+id/content_delivery_date_badge"
-                    style="@style/ContentMainBadgeTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:text="출발 시간" />
+                <!--<TextView-->
+                    <!--android:id="@+id/content_delivery_date_badge"-->
+                    <!--style="@style/ContentMainBadgeTitle"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_alignParentStart="true"-->
+                    <!--android:text="출발 시간" />-->
 
-                <TextView
-                    android:id="@+id/content_time_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/content_delivery_date_badge"
-                    android:layout_alignStart="@id/content_delivery_date_badge"
-                    android:layout_below="@id/content_delivery_date_badge"
-                    android:text="오후 5시 34분"
-                    android:textColor="@color/mainTextColor"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                <!--<TextView-->
+                    <!--android:id="@+id/content_time_text"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignLeft="@id/content_delivery_date_badge"-->
+                    <!--android:layout_alignStart="@id/content_delivery_date_badge"-->
+                    <!--android:layout_below="@id/content_delivery_date_badge"-->
+                    <!--android:text="오후 5시 34분"-->
+                    <!--android:textColor="@color/mainTextColor"-->
+                    <!--android:textSize="18sp"-->
+                    <!--android:textStyle="bold" />-->
 
-                <TextView
-                    android:id="@+id/content_date_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/content_time_text"
-                    android:layout_alignStart="@id/content_time_text"
-                    android:layout_below="@id/content_time_text"
-                    android:text="2019년 5월 3일"
-                    android:textColor="@color/mainTextColor"
-                    android:textSize="14sp" />
+                <!--<TextView-->
+                    <!--android:id="@+id/content_date_text"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignLeft="@id/content_time_text"-->
+                    <!--android:layout_alignStart="@id/content_time_text"-->
+                    <!--android:layout_below="@id/content_time_text"-->
+                    <!--android:text="2019년 5월 3일"-->
+                    <!--android:textColor="@color/mainTextColor"-->
+                    <!--android:textSize="14sp" />-->
 
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
 
             <RelativeLayout
                 android:layout_width="0dp"

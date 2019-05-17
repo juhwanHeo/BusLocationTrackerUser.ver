@@ -72,8 +72,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/from_to_purple" />
+            android:layout_marginRight="10dp" />
+            <!--android:src="@drawable/from_to_purple" />-->
 
         <TextView
             android:id="@+id/title_from_address"
@@ -232,7 +232,7 @@
             android:layout_above="@id/title_distance"
             android:layout_alignLeft="@id/title_distance"
             android:layout_alignStart="@id/title_distance"
-            android:text="거리" />
+            android:text="남은시간" />
 
     </RelativeLayout>
 </LinearLayout>

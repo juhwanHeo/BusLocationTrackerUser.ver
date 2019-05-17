@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">ShuttleBus(User ver2)</string>
     <string name="title_activity_bus">BusActivity</string>
-
+    <string name="title_activity_time_table">시간표</string>
     <string name="hello_world">Hello world!</string>
+
+    <string name="default_notification_channel_id"></string>
 </resources>

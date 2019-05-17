@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:textSize="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="버스 시간표"
+        android:textColor="@color/bgContent"
+        android:gravity="center"
+        android:background="@color/colorPrimary"
+        android:layout_margin="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="매월 3,8,13,18,23,28일은 5일장이 서는 관계로 차량이 정체되어 버스도착이 늦어질 수 있음을 알려드립니다."
+        android:layout_margin="8dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textColor="#F44336"
+        android:text="※ 토요일, 일요일, 공휴일은 운행하지 않습니다."
+        android:layout_margin="9dp"/>
+
+    <ListView
+        android:id="@+id/listVIew_time_table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+
+</LinearLayout>
