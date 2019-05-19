@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private Button getData_btn;
     private Button clear_btn;
     private Button toTimeTable_btn;
+    private Button setting_btn;
 
     public static TextView location_tv;
     private Context mContext = this;
@@ -47,6 +48,16 @@ public class MainActivity extends AppCompatActivity {
         getData_btn = (Button) findViewById(R.id.getData_btn);
         clear_btn = (Button) findViewById(R.id.clear_btn);
         toTimeTable_btn = (Button) findViewById(R.id.toTimeTable_btn);
+        setting_btn = (Button) findViewById(R.id.setting_btn);
+
+        setting_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         toRecycler_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,27 +75,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-//
-//        seekBar.setMax(100);
-//        seekBar2.setMax(100);
-//
-//        seekBar.setClickable(false);
-//        seekBar2.setClickable(false);
-//
-//
-//        seekBar.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                return true;
-//            }
-//        });
-//
-//        seekBar2.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                return true;
-//            }
-//        });
 
         getData_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,7 +158,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
+    private void replaceFragment(){
+//        FragmentManager fm = getSupportFragmentManager();
+//        FragmentTransaction ft = fm.beginTransaction();
+//        ft.replace(R.id.setting_activity, new SettingFragment());
+//        ft.commit();
+    }
 
 }

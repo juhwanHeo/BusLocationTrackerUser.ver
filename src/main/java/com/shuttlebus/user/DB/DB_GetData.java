@@ -1,4 +1,4 @@
-package com.shuttlebus.user.DB;
+﻿package com.shuttlebus.user.DB;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -55,12 +55,12 @@ public class DB_GetData {
         // It checks connection for Network
         ConnectivityManager manager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         if(manager.getActiveNetworkInfo()==null) {
-            Log.d("Test", "?�트?�크?�결 ?�됨");
+            Log.d("Test", "네트워크연결 안됨");
             AlertDialog alertDialog = new AlertDialog.Builder(mContext).create();
 
             alertDialog.setTitle("Network Error");
-            alertDialog.setMessage("\n?�터???�결???�인?�주?�요");
-            alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE,"?�인", new DialogInterface.OnClickListener() {
+            alertDialog.setMessage("\n인터넷 연결을 확인해주세요");
+            alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE,"확인", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                 }
@@ -84,7 +84,7 @@ public class DB_GetData {
                         busInfo = response.body().getLatLon();
                         arrivedList = response.body().getArrived();
                     } else {
-                        throw new NullPointerException("JSON?�류");
+                        throw new NullPointerException("JSON오류");
                     }
 
                     getArrivedData();
@@ -110,10 +110,10 @@ public class DB_GetData {
 //
 //            @Override
 //            protected void onPreExecute() {
-//                progressDialog = ProgressDialog.show(mContext, "Please Wait", "?�시�?기달??주세??n?�이?��? 불러?�고 ?�습?�다."
+//                progressDialog = ProgressDialog.show(mContext, "Please Wait", "잠시만 기달려 주세요\n데이터를 불러오고 있습니다."
 //                        , false, false);
 //
-//                //?�업 준�?코드 ?�성
+//                //작업 준비 코드 작성
 //
 //                super.onPreExecute();
 //            }
@@ -135,7 +135,7 @@ public class DB_GetData {
 //                                busInfo = response.body().getLatLon();
 //                                arrivedList = response.body().getArrived();
 //                            } else {
-//                                throw new NullPointerException("JSON?�류");
+//                                throw new NullPointerException("JSON오류");
 //                            }
 //
 //                            Thread.sleep(1000);

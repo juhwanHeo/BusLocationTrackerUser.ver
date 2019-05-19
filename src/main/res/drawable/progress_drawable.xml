@@ -21,12 +21,4 @@
 
         </clip>
     </item>
-    <!--<item android:id="@+id/progress">-->
-        <!--<clip-->
-            <!--android:clipOrientation="vertical"-->
-            <!--android:gravity="top"-->
-            <!--android:drawable="@drawable/ic_directions_bus_black_24dp"-->
-            <!--&gt;-->
-        <!--</clip>-->
-    <!--</item>-->
 </layer-list>

@@ -1,12 +1,10 @@
-# BusLocationTrackerUser.ver
+﻿# BusLocationTrackerUser.ver
 
 
-## 패치노트
-1, Notification 추가
+## 19/05/19 패치노트
+1, 설정 화면 추가 
 
-2, Ui 개선
 
-## Patch Note
-1, Add Notification
+## 19/05/19 Patch Note
+1, Add Setting Layout
 
-2, Ui Upgread

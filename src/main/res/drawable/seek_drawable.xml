@@ -1,26 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
-    >
-
-    <item android:id="@android:id/background"
-        android:rotation="270">
-        <color android:color="#777"/>
-    </item>
-    <item android:id="@android:id/progress"
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:bottom="20dp"
+        android:left="480dp"
+        android:right="60dp"
+        android:top="260dp"
         >
-        <clip
-            android:gravity="top">
-            <shape>
-                <gradient
-                    android:startColor="#000000"
-                    android:centerColor="#000000"
-                    android:endColor="#000000"
-                    android:angle="90"
-                    />
-            </shape>
-
-        </clip>
+        <shape>
+            <size android:width="-60dp" />
+            <corners android:radius="80dp"/>
+            <solid android:color="#961D1D" />
+        </shape>
     </item>
 
+    <item
+        android:bottom="20dp"
+        android:left="480dp"
+        android:right="60dp"
+        android:top="260dp"
+       >
+        <shape>
+            <size android:width="60dp" />
+            <corners android:radius="80dp"/>
+            <solid android:color="#961D1D" />
+        </shape>
+    </item>
+    <item
+        android:bottom="480dp"
+        android:right="70dp"
+        android:top="20dp">
+        <rotate
+            android:fromDegrees="-28"
+            android:pivotX="96%"
+            android:pivotY="50%"
+            android:toDegrees="-20">
+            <shape>
+                <corners android:radius="80dp"/>
+                <size android:height="60dp" />
+                <solid android:color="#AAA" />
+            </shape>
+        </rotate>
+    </item>
 
+    <item
+        android:bottom="20dp"
+        android:right="70dp"
+        android:top="480dp">
+        <rotate
+            android:fromDegrees="28"
+            android:pivotX="96%"
+            android:pivotY="50%"
+            android:toDegrees="-20">
+            <shape>
+                <corners android:radius="80dp"/>
+                <size android:height="60dp" />
+                <solid android:color="#AAA" />
+            </shape>
+        </rotate>
+    </item>
+
+    <item
+        android:bottom="20dp"
+        android:right="70dp"
+        android:top="480dp"
+        android:end="70dp">
+        <rotate
+            android:fromDegrees="28"
+            android:pivotX="96%"
+            android:pivotY="50%"
+            android:toDegrees="-20">
+            <shape>
+                <corners android:radius="80dp"/>
+                <size android:height="60dp" />
+                <solid android:color="#AAA" />
+            </shape>
+        </rotate>
+    </item>
 </layer-list>

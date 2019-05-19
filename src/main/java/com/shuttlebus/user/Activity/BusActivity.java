@@ -82,14 +82,14 @@ public class BusActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     DB_GetData.getData(mContext);
-                    Log.e("[getData]-->" + getApplicationContext(), "정상실행");
+                    Log.e("[getData]-->" + getApplicationContext(), "getData");
                 } catch (NullPointerException e) {
                     Log.e("[getData]NullPoint-->", e.getMessage());
                 } catch (ConnectException e) {
                     Log.e("[getData]Connect-->", e.getMessage());
                     return;
                 } catch (Exception e) {
-                    Log.e("[getData]-->", "알 수 없는 오류");
+                    Log.e("[getData]-->", "Error");
                 }
 
                 if (progressDialog != null && progressDialog.isShowing()) {

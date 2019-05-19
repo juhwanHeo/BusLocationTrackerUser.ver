@@ -1,4 +1,4 @@
-package com.shuttlebus.user.DB;
+﻿package com.shuttlebus.user.DB;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -14,7 +14,7 @@ import java.net.URL;
 
 public class RoadData {
     // com.shuttlebus.user.DB Connection
-    private static final String address = "address";  //주소 바�?
+    private static final String address = "address";  //주소 바뀜
     private static final String TAG_DATA="data";
     private static final String TAG_SPEED="avgspeed";
 

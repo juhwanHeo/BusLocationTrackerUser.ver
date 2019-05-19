@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+    <Preference
+        android:title="오픈소스 라이센스"
+        android:key="open2Source"
+        android:persistent="true"/>
+    <PreferenceCategory
+        android:title="화면">
+
+        <ListPreference
+            android:title="진행률 표시"
+            android:key="progressBarList"
+            android:entries="@array/progressBarEntry"
+            android:entryValues="@array/progressBarEntry"
+            android:summary="원형"
+            >
+
+        </ListPreference>
+        <CheckBoxPreference
+            android:title="체크박스"
+            android:summary="checkbox"
+            android:key="checkBox1">
+        </CheckBoxPreference>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="기타">
+        <Preference
+            android:title="오픈소스 라이센스"
+            android:key="openSource" />
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

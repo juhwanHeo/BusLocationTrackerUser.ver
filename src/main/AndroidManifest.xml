@@ -19,6 +19,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity android:name=".Activity.OpenSourceActivity">
+
+        </activity>
+        <activity android:name=".Activity.SettingActivity">
+
+        </activity>
         <activity
             android:name="com.shuttlebus.user.Activity.TimeTableActivity">
             <!--android:label="@string/title_activity_time_table"-->
@@ -31,6 +38,7 @@
             android:theme="@style/AppTheme.Template.Base">
 
         </activity>
+        
         <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
