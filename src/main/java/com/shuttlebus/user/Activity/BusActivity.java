@@ -127,15 +127,12 @@ public class BusActivity extends AppCompatActivity {
                 fab.setClickable(true);
             }
         });
-
-
     }
 
     private void findViews() {
         busTimeTextView = (TextView) findViewById(R.id.busTimeText);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         tmpEdit = (EditText) findViewById(R.id.tmpEdit);
-
 
     }
 
@@ -233,7 +230,6 @@ public class BusActivity extends AppCompatActivity {
                 for (int i = 0; i < busStations.length; i++) {
                     if (i != busStations.length - 1) {
                         items.add(new Item(busStations[i].getStationName()
-//                                , "거리: " + String.format("%.2fKm", maxDis[i]) + "\n진행률: " + progress[i]
                                         , busStations[i + 1].getStationName()
                                         , progress[i]
                                         , isArrived[i]
@@ -317,9 +313,8 @@ public class BusActivity extends AppCompatActivity {
 
         for (int i = 0; i < progress.length; i++) {
             // 전 정류장에 먼저 도착햇는지 여부 확인
-            if (i != 0 && !busStations[i].getIsBusArrived()) {
-                continue;
-            } else busCheck(busStations[i + 1], progress[i]);
+            if (i != 0 && !busStations[i].getIsBusArrived()) continue;
+             else busCheck(busStations[i + 1], progress[i]);
 
         }
     }

@@ -97,3 +97,69 @@ public class RoadData {
     }
 
 }
+
+//        class DownloadTask extends AsyncTask {
+//
+//            private ProgressDialog progressDialog;
+//
+//            @Override
+//            protected void onPreExecute() {
+//                progressDialog = ProgressDialog.show(mContext, "Please Wait", "잠시만 기달려 주세요\n데이터를 불러오고 있습니다."
+//                        , false, false);
+//
+//                //작업 준비 코드 작성
+//
+//                super.onPreExecute();
+//            }
+//
+//            @Override
+//            protected Object doInBackground(Object[] objects) {
+//                Retrofit retrofit = new Retrofit.Builder()
+//                        .baseUrl(ADDRESS)
+//                        .addConverterFactory(GsonConverterFactory.create())
+//                        .build();
+//                BusLocationService busLocationService = retrofit.create(BusLocationService.class);
+//                Call<RetrofitRepo> call = busLocationService.getPostLocationData(TAG_ARRIVED, TAG_LATLON);
+//                call.enqueue(new Callback<RetrofitRepo>() {
+//                    @Override
+//                    public void onResponse(Call<RetrofitRepo> call, Response<RetrofitRepo> response) {
+//                        // connection success!!!
+//                        try {
+//                            if (response.body() != null) {
+//                                busInfo = response.body().getLatLon();
+//                                arrivedList = response.body().getArrived();
+//                            } else {
+//                                throw new NullPointerException("JSON오류");
+//                            }
+//
+//                            Thread.sleep(1000);
+//                            getArrivedData();
+//                            getLatLonData();
+//                        } catch (NullPointerException e) {
+//                            Log.e("[ERROR]", e.getMessage());
+//                        } catch (Exception e) {
+//                            Log.e("[ERROR]", "Error");
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<RetrofitRepo> call, Throwable t) {
+//                        // connection fail...
+//                    }
+//                });
+//
+//                return null;
+//            }
+//
+//            @Override
+//            protected void onPostExecute(Object o) {
+//                super.onPostExecute(o);
+//                if (progressDialog != null && progressDialog.isShowing()) {
+//                    progressDialog.dismiss();
+//                }
+//            }
+//        }
+//        new DownloadTask().execute();
+////        d.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//    }

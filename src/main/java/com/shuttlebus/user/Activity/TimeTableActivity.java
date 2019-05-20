@@ -29,6 +29,5 @@ public class TimeTableActivity extends AppCompatActivity {
 
         // set elements to adapter
         theListView.setAdapter(mAdapter);
-
     }
 }

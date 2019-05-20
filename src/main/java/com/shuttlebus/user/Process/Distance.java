@@ -1,13 +1,10 @@
 package com.shuttlebus.user.Process;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Distance implements Station {
 
-
-    public Distance(){
-//        setGps();
-    }
-
-    public static double allDistance(BusStation[] stations){
+    public static double allDistance(@NotNull BusStation[] stations){
         double allDistance=0;
         for(int i = 0; i<stations.length-1;i++)
             allDistance += Distance.distance(stations[i], stations[i+1]);

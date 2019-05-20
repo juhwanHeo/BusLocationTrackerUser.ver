@@ -10,8 +10,6 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-//import android.support.v4.app.NotificationCompat;
-import android.os.PowerManager;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
@@ -23,15 +21,10 @@ import com.shuttlebus.user.R;
 
 import org.jetbrains.annotations.NotNull;
 
-//import androidx.work.OneTimeWorkRequest;
-//import androidx.work.WorkManager;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "Firebase";
-
-    private PowerManager powerManager;
-    private PowerManager.WakeLock wakeLock;
 
     /**
      * Called when message is received.
@@ -62,12 +55,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.e(TAG, "From: " + remoteMessage.getFrom());
-
-        powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        wakeLock = powerManager.newWakeLock( PowerManager.SCREEN_DIM_WAKE_LOCK
-                | PowerManager.ACQUIRE_CAUSES_WAKEUP,"Wake Lock");
-//            if(wakeLock.isHeld())
-        wakeLock.acquire(5*60*1000 /*5 minutes*/);
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {

@@ -1,5 +1,7 @@
 package com.shuttlebus.user.Process;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Location {
     private double latitude;
     private double longitude;
@@ -20,6 +22,7 @@ public class Location {
         this.longitude = longitude;
     }
 
+    @NotNull
     @Override
     public String toString() {
         return "Location [latitude=" + latitude + ", longitude=" + longitude + "]";

@@ -19,12 +19,10 @@ import java.util.HashSet;
 
 import androidx.annotation.NonNull;
 
+import org.jetbrains.annotations.NotNull;
+
 import static android.view.View.VISIBLE;
 
-/**
- * Simple example of ListAdapter for using with Folding Cell
- * Adapter holds indexes of unfolded elements for correct work with default reusable views behavior
- */
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class FoldingCellListAdapter extends ArrayAdapter<Item> {
 
@@ -40,6 +38,7 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
     private Item getItems(int position) throws NullPointerException {
         return items.get(position);
     }
+
     private String getPreviousStation(int position){
         return items.get(position-1).getStartStation();
     }
@@ -48,7 +47,9 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
         return items.get(position).getEndStation();
     }
 
+    private void processViews(){
 
+    }
 
     @SuppressLint({"ViewHolder", "SetTextI18n", "DefaultLocale"})
     @NonNull
@@ -57,33 +58,9 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
 
         Item item = getItem(position);
 
-        // get item for selected view
-        // if cell is exists - reuse it, if not - create the new one from resource
-        ViewHolder viewHolder;
-        viewHolder = new ViewHolder();
         LayoutInflater vi = LayoutInflater.from(getContext());
         convertView = vi.inflate(R.layout.cell, parent, false);
-        // binding view parts to view holder
-        viewHolder.background_tv = convertView.findViewById(R.id.background_tv);
-        viewHolder.arrived_relative_layout = convertView.findViewById(R.id.arrived_relative_layout);
-        viewHolder.price = convertView.findViewById(R.id.title_price);
-        viewHolder.time = convertView.findViewById(R.id.title_time_label);
-        viewHolder.date = convertView.findViewById(R.id.title_date_label);
-        viewHolder.startStation = convertView.findViewById(R.id.title_from_address);
-        viewHolder.endStation = convertView.findViewById(R.id.title_to_address);
-        viewHolder.progress = convertView.findViewById(R.id.title_requests_count);
-//        viewHolder.content_date_text = convertView.findViewById(R.id.content_date_text);
-        viewHolder.content_progress_text = convertView.findViewById(R.id.content_progress_text);
-//        viewHolder.content_time_text = convertView.findViewById(R.id.content_time_text);
-        viewHolder.content_lateTIme_Text = convertView.findViewById(R.id.content_lateTIme_Text);
-        viewHolder.content_previousStation = convertView.findViewById(R.id.content_previousStation);
-        viewHolder.content_nextStation = convertView.findViewById(R.id.content_nextStation);
-        viewHolder.content_distance_text = convertView.findViewById(R.id.head_image_center_text);
-        viewHolder.title_distance = convertView.findViewById(R.id.title_distance);
-        viewHolder.title_seekBar = convertView.findViewById(R.id.title_seekBar);
-        convertView.setTag(viewHolder);
-
-        // bind data from selected element to view through view holder
+        ViewHolder viewHolder = findViews(convertView);
 
         if (item != null) {
             viewHolder.startStation.setText(item.getStartStation());
@@ -93,10 +70,6 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
             item.setSeekBar(viewHolder.title_seekBar);
             viewHolder.title_seekBar.setProgress(item.getProgress());
         }
-//        viewHolder.content_date_text.setText(item.getDate());
-//        viewHolder.content_time_text.setText(item.getTime());
-
-
 
         if(position != 0){
             viewHolder.content_previousStation.setText(getPreviousStation(position));
@@ -134,7 +107,6 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
             }
         }
 
-
         /*
          Color
          */
@@ -166,7 +138,6 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
             }
         }
 
-
         // 정류장 도착
         if (item != null) {
             if (item.getArrived()) {
@@ -180,7 +151,6 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
                 viewHolder.title_distance.setText("곧 도착");
             }
         }
-
         return convertView;
     }
 
@@ -213,5 +183,31 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
         TextView content_distance_text;
         TextView title_distance;
         BubbleSeekBar title_seekBar;
+
+    }
+
+    private ViewHolder findViews(@NotNull View convertView){
+        ViewHolder viewHolder = new ViewHolder();
+
+        viewHolder.background_tv = convertView.findViewById(R.id.background_tv);
+        viewHolder.arrived_relative_layout = convertView.findViewById(R.id.arrived_relative_layout);
+        viewHolder.price = convertView.findViewById(R.id.title_price);
+        viewHolder.time = convertView.findViewById(R.id.title_time_label);
+        viewHolder.date = convertView.findViewById(R.id.title_date_label);
+        viewHolder.startStation = convertView.findViewById(R.id.title_from_address);
+        viewHolder.endStation = convertView.findViewById(R.id.title_to_address);
+        viewHolder.progress = convertView.findViewById(R.id.title_requests_count);
+//        viewHolder.content_date_text = convertView.findViewById(R.id.content_date_text);
+        viewHolder.content_progress_text = convertView.findViewById(R.id.content_progress_text);
+//        viewHolder.content_time_text = convertView.findViewById(R.id.content_time_text);
+        viewHolder.content_lateTIme_Text = convertView.findViewById(R.id.content_lateTIme_Text);
+        viewHolder.content_previousStation = convertView.findViewById(R.id.content_previousStation);
+        viewHolder.content_nextStation = convertView.findViewById(R.id.content_nextStation);
+        viewHolder.content_distance_text = convertView.findViewById(R.id.head_image_center_text);
+        viewHolder.title_distance = convertView.findViewById(R.id.title_distance);
+        viewHolder.title_seekBar = convertView.findViewById(R.id.title_seekBar);
+        convertView.setTag(viewHolder);
+
+        return viewHolder;
     }
 }

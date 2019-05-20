@@ -6,6 +6,10 @@
         android:textSize="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="오픈소스 정보들...."/>
+        android:text="예시"/>
+    <TextView
+        android:id="@+id/license_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

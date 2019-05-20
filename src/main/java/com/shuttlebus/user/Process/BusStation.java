@@ -1,6 +1,8 @@
 package com.shuttlebus.user.Process;
 
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Calendar;
 
 public class BusStation implements Station {
@@ -12,15 +14,12 @@ public class BusStation implements Station {
     private static int hour;
     private static int minute;
 
-    public BusStation(){
-
-    }
-    public BusStation(String stationName, Location location) {
+    private BusStation(String stationName, @NotNull Location location) {
         this(stationName, location.getLatitude(), location.getLongitude());
     }
 
 
-    public BusStation(String stationName,double latitude, double longitude){
+    private BusStation(String stationName, double latitude, double longitude){
         this.stationName = stationName;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -81,7 +80,7 @@ public class BusStation implements Station {
          * 아파트  -> 1번출구 -> 다리및 -> 심석고 -> 송라중 -> 마석초(앞 문) -> 마석고 ->  2번출구 -> 아파트
          */
         else if(course == 'D'){
-            BusStation stations[] = {
+            BusStation[] stations = {
                     new BusStation("아파트" ,apartmentLat, apartmentLon),
                     new BusStation("마석역 1번출구",mStationExit1Lat,mStationExit1Lon),
                     new BusStation("다리",underBridgeLat, underBridgeLon),
@@ -94,12 +93,12 @@ public class BusStation implements Station {
             };
             return stations;
         } else if (course == 'F') {
-            BusStation station[] = { new BusStation("마석역", maseokStation), new BusStation("청평역", cheongpyeongStation),
+            BusStation[] station = {new BusStation("마석역", maseokStation), new BusStation("청평역", cheongpyeongStation),
                     new BusStation("가평역", GapyeongStation), new BusStation("강촌역", KangchonStation),
-                    new BusStation("춘천역", ChuncheonStation) };
+                    new BusStation("춘천역", ChuncheonStation)};
             return station;
         } else if (course == 'G') {
-            BusStation station[] = { new BusStation("춘천역", ChuncheonStation), new BusStation("강촌역", KangchonStation),
+            BusStation[] station = { new BusStation("춘천역", ChuncheonStation), new BusStation("강촌역", KangchonStation),
                     new BusStation("가평역", GapyeongStation), new BusStation("청평역", cheongpyeongStation),
                     new BusStation("마석역", maseokStation)
 
@@ -113,7 +112,7 @@ public class BusStation implements Station {
 
 
 
-    public static void checkTime(Scheduler scheduler){
+    public static void checkTime(@NotNull Scheduler scheduler){
         Calendar cal = Calendar.getInstance();
 
         int curhour = cal.get(Calendar.HOUR_OF_DAY);
@@ -143,8 +142,6 @@ public class BusStation implements Station {
                         minute = scheduler.getTimeTable()[i].getMinute();
                         scheduler.setCurrentCourse(scheduler.getTimeTable()[i].getCourse());
                     }
-//					System.err.println("1111111");
-//					System.err.println(scheduler.getCurrentCourse());
                 }
             }
         }

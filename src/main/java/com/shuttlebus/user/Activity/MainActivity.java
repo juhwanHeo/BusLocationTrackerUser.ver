@@ -28,13 +28,14 @@ public class MainActivity extends AppCompatActivity {
     private Button toTimeTable_btn;
     private Button setting_btn;
 
-    public static TextView location_tv;
+    public TextView location_tv;
     private Context mContext = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        findViews();
         try {
             DB_GetData.getData(this);
 //            getData = new DB_GetData();
@@ -42,13 +43,6 @@ public class MainActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
-
-        location_tv = (TextView) findViewById(R.id.location_tv);
-        toRecycler_btn = (Button) findViewById(R.id.toRecycler_btn);
-        getData_btn = (Button) findViewById(R.id.getData_btn);
-        clear_btn = (Button) findViewById(R.id.clear_btn);
-        toTimeTable_btn = (Button) findViewById(R.id.toTimeTable_btn);
-        setting_btn = (Button) findViewById(R.id.setting_btn);
 
         setting_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +113,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void findViews(){
+        location_tv = (TextView) findViewById(R.id.location_tv);
+        toRecycler_btn = (Button) findViewById(R.id.toRecycler_btn);
+        getData_btn = (Button) findViewById(R.id.getData_btn);
+        clear_btn = (Button) findViewById(R.id.clear_btn);
+        toTimeTable_btn = (Button) findViewById(R.id.toTimeTable_btn);
+        setting_btn = (Button) findViewById(R.id.setting_btn);
+    }
+
     @Override
     public void onBackPressed(){
 
@@ -150,19 +153,11 @@ public class MainActivity extends AppCompatActivity {
         alert.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
-//                alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
-//                alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+
             }
         });
         alert.show();
 
-    }
-
-    private void replaceFragment(){
-//        FragmentManager fm = getSupportFragmentManager();
-//        FragmentTransaction ft = fm.beginTransaction();
-//        ft.replace(R.id.setting_activity, new SettingFragment());
-//        ft.commit();
     }
 
 }

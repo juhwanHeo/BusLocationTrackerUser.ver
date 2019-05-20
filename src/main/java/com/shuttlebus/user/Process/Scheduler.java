@@ -4,7 +4,7 @@ import com.shuttlebus.user.TimeTable.TimeTable;
 
 public class Scheduler {
 
-   private TimeTable timeTable[] = {
+   private TimeTable[] timeTable = {
             new TimeTable(6, 40),
             new TimeTable(7, 00),
             new TimeTable(7, 20),

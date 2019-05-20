@@ -10,7 +10,6 @@ public class BusProgress {
         } else {
             progress = 0;
         }
-
         return progress;
     }
 
