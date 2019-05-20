@@ -13,3 +13,20 @@
 ## 19/05/20 Patch Note
 1, Optimized Code
 
+ScreenShots
+----------
+
+Bus_Activity
+<div>
+  <img width="200" src ="https://user-images.githubusercontent.com/47820142/57994799-d9247000-7af9-11e9-98ba-51e18010c7a9.jpg">
+</div>
+
+TimeTable_Activity
+<div>
+  <img width="200" src ="https://user-images.githubusercontent.com/47820142/57994801-d9bd0680-7af9-11e9-9ac5-6fbf44b3e945.jpg">
+</div>
+
+Setting_Activity
+<div>
+  <img width="200" src ="https://user-images.githubusercontent.com/47820142/57994800-d9bd0680-7af9-11e9-98b6-529e2e27f59e.jpg">
+</div>
